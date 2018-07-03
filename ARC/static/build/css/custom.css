@@ -22,11 +22,12 @@
 
 }
 
-/* sana ginawa ko nalang to class pota */
+/* sana ginawa ko nalang to class pota - next time ko nalang ayusin */ 
 #item-scan-modal, #item-remarks-modal, #item-return-remarks-modal, 
 #item-borrowed-remarks-modal, #checkout-items-modal, #confirm-return-items-modal,
 #register-itemid-borrow-modal, #register-itemid-return-modal,
-#edit-lab-modal, #eval-user-modal, #eval-residency-modal {
+#edit-lab-modal, #eval-user-modal, #eval-residency-modal, #view-item-details-modal,
+#view-item-log-modal, #edit-item-details-modal{
 
     width: 550px;
 
