@@ -27,7 +27,8 @@
 #item-borrowed-remarks-modal, #checkout-items-modal, #confirm-return-items-modal,
 #register-itemid-borrow-modal, #register-itemid-return-modal,
 #edit-lab-modal, #eval-user-modal, #eval-residency-modal, #view-item-details-modal,
-#view-item-log-modal, #edit-item-details-modal{
+#view-item-log-modal, #edit-item-details-modal, #view-resi-details-modal,
+#view-user-details-modal, #edit-user-details-modal {
 
     width: 550px;
 
