@@ -1,5 +1,13 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+#Forms
+from ARC.forms import InventoryForm
+from ARC.forms import LaboratoryForm
+from ARC.forms import LaboratoryForm
 
+#Models
+from ARC.models import Inventory
+from ARC.models import Ref_Laboratory
 # Create your views here.
 
 def login(request):
@@ -21,9 +29,6 @@ def AdminAddUser(request):
 def AdminManageUser(request):
     return render(request, 'Admin/AdminManageUser.html')
 
-def AdminEvaluateUser(request):
-    return render(request, 'Admin/AdminEvaluateUser.html')
-
 def AdminBorrowItem(request):
     return render(request, 'Admin/AdminBorrowItem.html')
 
@@ -36,8 +41,27 @@ def AdminReturnItem2(request):
 def AdminViewInventory(request):
     return render(request, 'Admin/AdminViewInventory.html')
 
+
 def AdminAddItem(request):
-    return render(request, 'Admin/AdminAddItem.html')
+    if request.method == 'POST':
+        form = InventoryForm(request.POST)
+        if form.is_valid():
+            name = request.POST.get('itemname', '')
+            desc = request.POST.get('description', '')
+            type = request.POST.get('item_type', '')
+            qty = request.POST.get('quantity', '')
+            uid = request.POST.get('uid', '')
+            inventory_obj = Inventory(ItemName=name, Description=desc, ItemType=type, Quantity=qty, UniqueID=uid)
+            inventory_obj.save();
+
+            return HttpResponse("Success")
+
+    else:
+        form = InventoryForm()
+
+    return render(request, 'Admin/AdminAddItem.html', {
+        'form': form,
+    })
 
 def AdminViewResidencies(request):
     return render(request, 'Admin/AdminViewResidencies.html')
@@ -50,9 +74,18 @@ def AdminManageTerm(request):
 
 def AdminResidencyReport(request):
     return render(request, 'Admin/AdminResidencyReport.html')
+
+def AdminAddLaboratory(request):
+    return render(request, 'Admin/AdminAddLaboratory.html')
+
+def AdminEditLaboratory(request):
+    return render(request, 'Admin/AdminEditLaboratory.html')
 #<--END-->
 
 #<--STUDENT-->
+def StudentProfile(request):
+    return render(request, 'Students/StudentProfile.html')
+
 def StudentDashboard(request):
     return render(request, 'Students/StudentDashboard.html')
 
@@ -75,6 +108,9 @@ def StudentReturnItem2(request):
 #<--FACULTY-->
 def FacultyDashboard(request):
     return render(request, 'Faculty/FacultyDashboard.html')
+
+def FacultyEvaluateUser(request):
+    return render(request, 'Faculty/FacultyEvaluateUser.html')
 
 def FacultyCalendar(request):
     return render(request, 'Faculty/FacultyCalendar.html')

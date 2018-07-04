@@ -22,6 +22,14 @@
 
     <!-- Custom Theme Style -->
     <link href="{% static 'production/../build/css/custom.css' %}" rel="stylesheet">
+
+    <!-- Dual list box -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'src/bootstrap-duallistbox.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+    <script src="{% static 'src/jquery.bootstrap-duallistbox.js' %}"></script>
   </head>
 
   <body class="nav-md">
@@ -49,6 +57,14 @@
                   <li><a href="{% url 'Faculty/Calendar' %}"><i class="fa fa-home"></i>Home</a></li>
 
                   <li><a href="#"><i class="fa fa-user"></i>Profile</a></li>
+
+                  <li><a><i class="fa fa-users"></i>Accounts<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="{% url 'Faculty/EvaluateUser' %}">Evaluate Pending Users</a></li>
+
+                    </ul>
+                  </li>
 
                   <li><a><i class="fa fa-users"></i>Groups<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -131,18 +147,18 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                  <div id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fullname">Group Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Group Name
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="last-name" name="fullname" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="last-name" name="groupname" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="accounttype">Group Laboratory <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Laboratory
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select id="accounttype" class="form-control" required>
@@ -156,14 +172,16 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fullname">Group Members <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div id="tags_1_tagsinput" class="tagsinput" style="width: auto; min-height: 100px; height: 100px;">
-                          <span class="tag"><span>hello&nbsp;&nbsp;</span><a href="#" title="Removing Tag">x</a></span>
-                        </div>
-                          <input type="hidden" name="groupmembers[]" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fullname">Members
+                        </label><br><br>
+						<div style="width:600px;margin-left:265px;">
+						<select multiple="multiple" size="8" name="select2[]" required>
+						    <option value="option7">Option 7</option>
+							<option value="option8">Option 8</option>
+							<option value="option9">Option 9</option>
+							<option value="option0">Option 10</option>
+						</select>
+						</div>
                       </div>
 
                       <div class="ln_solid"></div>
@@ -188,6 +206,21 @@
       </div>
     </div>
 
+    <script>
+    var demo1 = $('select[name="select2[]"]').bootstrapDualListbox();
+    var limit1 = document.getElementById("limit").value;
+
+    demo1.on('change', function(){
+    var size = demo1.find(":selected").size();
+    if(size > limit1){
+        demo1.find(":selected").each(function(ind, sel){
+            if(ind > (limit1 - 1))
+                $(this).prop("selected", false)
+        })
+        demo1.bootstrapDualListbox('refresh', true);
+    }
+	})
+	</script>
     <!-- jQuery -->
     <script src="{% static 'production/../vendors/jquery/dist/jquery.min.js' %}"></script>
     <!-- Bootstrap -->

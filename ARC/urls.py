@@ -15,7 +15,6 @@ urlpatterns = [
     #Accounts
     url(r'^Admin/ManageUser$', views.AdminManageUser, name='Admin/ManageUser'),
     url(r'Admin/AddUser$', views.AdminAddUser, name='Admin/AddUser'),
-    url(r'Admin/EvaluateUser$', views.AdminEvaluateUser, name='Admin/EvaluateUser'),
     #Inventory
     url(r'^Admin/ViewInventory$', views.AdminViewInventory, name='Admin/ViewInventory'),
     url(r'^Admin/AddItem$', views.AdminAddItem, name='Admin/AddItem'),
@@ -31,9 +30,15 @@ urlpatterns = [
     url(r'^Admin/ResidencyReport$', views.AdminResidencyReport, name='Admin/ResidencyReport'),
     #Inbox
     url(r'^Admin/Inbox$', views.AdminInbox, name='Admin/Inbox'),
+    #Laboratory
+    url(r'^Admin/AddLaboratory', views.AdminAddLaboratory, name='Admin/AddLaboratory'),
+    url(r'^Admin/EditLaboratory$', views.AdminEditLaboratory, name='Admin/EditLaboratory'),
+
     #<--END-->
 
     #<--STUDENT-->
+    #Profile
+    url(r'Student/Profile$', views.StudentProfile, name='Student/Profile'),
     #Dashboard
     url(r'^Student$', views.StudentDashboard, name='Student/Dashboard'),
     url(r'^Student/Calendar$', views.StudentDashboard2, name='Student/Calendar'),
@@ -50,6 +55,7 @@ urlpatterns = [
     url(r'^Faculty$', views.FacultyDashboard, name='Faculty/Dashboard'),
     url(r'^Faculty/Calendar$', views.FacultyCalendar, name='Faculty/Calendar'),
     #Groups
+    url(r'Faculty/EvaluateUser$', views.FacultyEvaluateUser, name='Faculty/EvaluateUser'),
     url(r'Faculty/ManageGroups$', views.FacultyManageGroups, name='Faculty/ManageGroups'),
     url(r'Faculty/AddGroup$', views.FacultyAddGroup, name='Faculty/AddGroup'),
     url(r'Faculty/EditGroup$', views.FacultyEditGroup, name='Faculty/EditGroup'),

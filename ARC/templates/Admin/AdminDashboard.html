@@ -56,7 +56,6 @@
 
                       <li><a href="{% url 'Admin/ManageUser' %}">Manage Users</a></li>
                       <li><a href="{% url 'Admin/AddUser' %}">Add User</a></li>
-                      <li><a href="{% url 'Admin/EvaluateUser' %}">Evaluate Pending Users</a></li>
 
                     </ul>
                   </li>
@@ -74,6 +73,15 @@
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-building"></i>Laboratories<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+
+                    <li><a href="{% url 'Admin/AddLaboratory' %}">Add Laboratory</a></li>
+                    <li><a href="{% url 'Admin/EditLaboratory' %}">Edit Laboratory</a></li>
+
+                  </ul>
+                  </li>
+
                   <li><a><i class="fa fa-table"></i>Inventory<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 
@@ -84,7 +92,7 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-exchange-alt"></i>Item Lending<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-exchange"></i>Item Lending<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 
                       <li><a href="{% url 'Admin/BorrowItem' %}">Borrow Item</a></li>

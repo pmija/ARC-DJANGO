@@ -57,7 +57,6 @@
 
                       <li><a href="{% url 'Admin/ManageUser' %}">Manage Users</a></li>
                       <li><a href="{% url 'Admin/AddUser' %}">Add User</a></li>
-                      <li><a href="{% url 'Admin/EvaluateUser' %}">Evaluate Pending Users</a></li>
 
                     </ul>
                   </li>
@@ -73,6 +72,15 @@
                       <li><a href="{% url 'Admin/ManageTerm' %}">Manage Term and Year</a></li>
 
                     </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-building"></i>Laboratories<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+
+                    <li><a href="{% url 'Admin/AddLaboratory' %}">Add Laboratory</a></li>
+                    <li><a href="{% url 'Admin/EditLaboratory' %}">Edit Laboratory</a></li>
+
+                  </ul>
                   </li>
 
                   <li><a><i class="fa fa-table"></i>Inventory<span class="fa fa-chevron-down"></span></a>
@@ -150,13 +158,13 @@
                   </div>
                   <div class="x_content">
 
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">{% csrf_token %}
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="itemname">Item Name
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="last-name" name="itemname" requ ired="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="last-name" name="itemname" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -192,10 +200,10 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="quantity">Unique ID
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="uid">Unique ID
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="input" readonly="readonly" id="unique_id_readonly" name="quantity" class="form-control col-md-6 col-xs-12">
+                          <input type="number" id="uid" name="uid" class="form-control col-md-6 col-xs-12">
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".div-scan-item-modal">Scan Item</button>
                         </div>
                       </div>
@@ -211,9 +219,9 @@
                         </div>
                         <div class="modal-body">
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="quantity">Unique ID</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="unique_id">Unique ID</label>
                             <div class="col-md-8 col-sm-7 col-xs-12">
-                              <input type="input" name="unique_id" required="required" class="form-control col-md-12 col-xs-12">
+                              <input type="input" name="unique_id" class="form-control col-md-12 col-xs-12">
                             </div>
                           </div>
                         </div>

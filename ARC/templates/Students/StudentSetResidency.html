@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ARC | </title>
+
+	<link href="custom-font/montserrat.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- icheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+         <div class="col-md-3 left_col menu_fixed">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title">
+              <p class="site_title"><img src="images/sidebar-logo.png" id="sidebar-logo"> ARC</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  
+                  <li><a href="Dashboard.html"><i class="fa fa-home"></i> Home</a></li>
+                  
+                  <li><a href="#"><i class="fa fa-user"></i>Profile</a></li>
+				          
+                  <li><a><i class="fa fa-users"></i>Accounts<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="#">Manage Users</a></li>
+                      <li><a href="#">Add User</a></li>
+                      <li><a href="#">Evaluate Users</a></li>
+
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-users"></i>Groups<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="#">Manage Groups</a></li>
+                      <li><a href="#">Add Group</a></li>
+                      <li><a href="#">Edit Group</a></li>
+
+                    </ul>
+                  </li>
+                  
+                  <li><a><i class="fa fa-users"></i>Residency<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="#">Set Residency</a></li>
+                      <li><a href="#">Edit Residency</a></li>
+                      <li><a href="#">View Residencies</a></li>
+                      <li><a href="#">Evaluate Residency</a></li>
+                      <li><a href="#">Manage Term and Year</a></li>
+
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-users"></i>Laboratories<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="#">Add Laboratory</a></li>
+                      <li><a href="#">Edit Laboratory</a></li>
+                      <li><a href="#">Edit Timeslots</a></li>
+
+                    </ul>
+                  </li>
+				          
+                  <li><a><i class="fa fa-table"></i>Inventory</a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="#">View Inventory</a></li>
+                      <li><a href="#">Add Items</a></li>
+                      <li><a href="#">Edit Items</a></li>
+
+                    </ul>
+                  </li>
+                  
+                  <li><a><i class="fa fa-file"></i>Reports<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="tables.html">Residency</a></li>
+                      <li><a href="tables_dynamic.html">Inventory</a></li>
+
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fa fa-envelope"></i>Inbox</a></li>
+
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="Login.html">Log Out &nbsp;<i class="fa fa-sign-out"></i></a>
+                </li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-left">
+                <li id="welcome-banner">
+                  Welcome! Bianca Marie R. Cauyao
+                </li>
+              </ul>
+
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <div class="row">
+              <div class="col-md-12">
+
+                    <!-- Manual Item Entry for Borrowing -->
+										<!-- START Table -->
+        						
+                    <div class="row">
+                  
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="x_panel">
+                      <div class="x_title">
+                        <h4><b>Timeslot for Residency</b></h4>
+                        <div class="clearfix"></div>
+                      </div>
+
+                          <div class="col-md-2"></div>
+
+                          <div class="col-md-8">
+                            <div class="x_panel">
+
+                              <div class="x_title">
+                                <h4><b>Laboratory for Residency</b></h4>
+                                <div class="clearfix"></div>
+                              </div>
+
+                              <div class="x_content">
+
+                                <h5><b>Laboratory:</b>&nbsp; CEHCI</h5>
+
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <div class="row"></div>
+
+                          <table class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+                            <thead>
+                              <tr>
+                                <th style="width: 20%; text-align: center;">Monday</th>
+                                <th style="width: 20%; text-align: center;">Tuesday</th>
+                                <th style="width: 20%; text-align: center;">Wednesday</th>
+                                <th style="width: 20%; text-align: center;">Thursday</th>
+                                <th style="width: 20%; text-align: center;">Friday</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 AM - 9:00 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 AM - 9:00 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 AM - 9:00 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 AM - 9:00 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 AM - 9:00 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 9:15 AM - 10:45 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 9:15 AM - 10:45 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 9:15 AM - 10:45 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 9:15 AM - 10:45 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 9:15 AM - 10:45 AM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 11:00 AM - 12:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 11:00 AM - 12:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 11:00 AM - 12:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 11:00 AM - 12:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 11:00 AM - 12:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 12:45 PM - 2:15 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 12:45 PM - 2:15 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 12:45 PM - 2:15 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 12:45 PM - 2:15 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 12:45 PM - 2:15 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 2:30 PM - 4:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 2:30 PM - 4:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 2:30 PM - 4:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 2:30 PM - 4:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 2:30 PM - 4:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 4:15 PM - 5:45 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 4:15 PM - 5:45 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 4:15 PM - 5:45 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 4:15 PM - 5:45 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 4:15 PM - 5:45 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 6:00 PM - 7:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 6:00 PM - 7:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 6:00 PM - 7:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 6:00 PM - 7:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 6:00 PM - 7:30 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 PM - 9:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 PM - 9:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 PM - 9:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 PM - 9:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                                <td>
+                                  <label>
+                                    <input type="checkbox" class="flat" name="remarks_damaged" value="damaged"> &nbsp; 7:30 PM - 9:00 PM
+                                  </label>
+                                  <hr class="no-margin">
+                                  <div style="text-align: center;">Slots: 20</div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                          <hr class="no-margin">
+
+                          <div class="form-group">
+                            <div class="col-md-12" align="center">
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target=".div-checkout-sched-modal">
+                              Submit Residency</button>
+                            </div>
+                          </div><div class="row"></div>
+
+                      </div>
+                    </div>
+                    </div>
+						
+						        <!-- END Table -->
+
+                    <!-- MODAL FOR RESIDENCY SCHEDULE CHECKOUT -->
+                    <!-- MODAL FOR RESIDENCY SCHEDULE CHECKOUT -->
+                    <!-- MODAL FOR RESIDENCY SCHEDULE CHECKOUT -->
+
+                    <div class="modal fade div-checkout-sched-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm" id="checkout-sched-modal">
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel2">Application Summary</h4>
+                      </div>
+                      <div class="modal-body">
+
+                      <form method="POST" action="#" class="form-horizontal form-label-left">
+
+                        <div class="x_panel">
+
+                          <div class="x_title">
+                            <h4><b>Laboratory</b></h4>
+                            <div class="clearfix"></div>
+                          </div>
+
+                          <div class="x_content">
+
+                            <h5><b>Laboratory:</b> CEHCI</h5>
+
+                          </div>
+
+                        </div>
+
+                        <div class="x_panel">
+
+                          <div class="x_title">
+                            <h4><b>Schedule Summary</b></h4>
+                            <div class="clearfix"></div>
+                          </div>
+
+                          <div class="x_content">
+
+                            <table class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+                            <thead>
+                              <tr>
+                                <th style="width: 20%;">Monday</th>
+                                <th style="width: 20%;">Tuesday</th>
+                                <th style="width: 20%;">Wednesday</th>
+                                <th style="width: 20%;">Thursday</th>
+                                <th style="width: 20%;">Friday</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>4:15 PM - 5:45 PM</td>
+                                <td>4:15 PM - 5:45 PM</td>
+                                <td>N/A</td>
+                              </tr>
+                              <tr>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>6:00 PM - 7:30 PM</td>
+                                <td>6:00 PM - 7:30 PM</td>
+                                <td>N/A</td>
+                              </tr>
+                            </tbody>
+                            </table>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit Residency</button>
+                      </div>
+
+                    </div>
+                    </div>
+                    </div>
+
+                    <!-- END MODAL FOR RESIDENCY SCHEDULE CHECKOUT -->
+                    <!-- END MODAL FOR RESIDENCY SCHEDULE CHECKOUT -->
+                    <!-- END MODAL FOR RESIDENCY SCHEDULE CHECKOUT -->
+                    <!-- ######################### -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        
+        <!-- /footer content -->
+      </div>
+    </div>
+
+	
+	
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+	
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- jQuery Sparklines -->
+    <script src="../vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- Flot -->
+    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../vendors/DateJS/build/date.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+  </body>
+</html>

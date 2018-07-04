@@ -123,6 +123,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 # Google Authentication backends
 
 AUTHENTICATION_BACKENDS = (
@@ -133,8 +136,8 @@ AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
 )
 
-LOGIN_URL = ''
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'Student/Dashboard'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='196604570988-uotldethfefv0scijesb6dhnoqq9bj9s.apps.googleusercontent.com'  #Google Authentication Client Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'ICylWypISyieuzRSz8PezEZx' #Google Authentication Client Secret
