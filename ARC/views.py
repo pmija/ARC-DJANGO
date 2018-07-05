@@ -103,6 +103,9 @@ def StudentReturnItem(request):
 
 def StudentReturnItem2(request):
     return render(request, 'Students/StudentReturnItem2.html')
+
+def StudentSetResidency(request):
+    return render(request, 'Students/StudentSetResidency.html')
 #<--END-->
 
 #<--FACULTY-->

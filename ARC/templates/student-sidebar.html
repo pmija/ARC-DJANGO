@@ -1,0 +1,31 @@
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+  <div class="menu_section">
+    <ul class="nav side-menu">
+
+      <li><a href="{% url 'Student/Calendar' %}"><i class="fas fa-home"></i> Home</a></li>
+
+      <li><a href="#"><i class="fas fa-user-circle"></i>Profile</a></li>
+
+      <li><a><i class="fa fa-user-clock"></i>Residency<span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+
+          <li><a href="#">Set Residency</a></li>
+          <li><a href="#">Edit Residency</a></li>
+
+        </ul>
+      </li>
+
+
+      <li><a><i class="fa fa-file"></i>Reports<span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+
+          <li><a href="#">Inventory</a></li>
+
+        </ul>
+      </li>
+
+      <li><a href="{% url 'Student/Inbox' %}"><i class="fa fa-envelope"></i>Inbox</a></li>
+
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+  <div class="menu_section">
+    <ul class="nav side-menu">
+
+      <li><a href="{% url 'Faculty/Calendar' %}"><i class="fas fa-home"></i>Home</a></li>
+
+      <li><a href="#"><i class="fas fa-user-circle"></i>Profile</a></li>
+
+      <li><a><i class="fa fa-users"></i>Groups<span class="fas fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+
+          <li><a href="{% url 'Faculty/ManageGroups' %}">Manage Groups</a></li>
+          <li><a href="{% url 'Faculty/AddGroup' %}">Add Group</a></li>
+          <li><a href="{% url 'Faculty/EditGroup' %}">Edit Group</a></li>
+
+        </ul>
+      </li>
+
+      <li><a><i class="fa fa-user-clock"></i>Residency<span class="fas fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+
+          <li><a href="{% url 'Faculty/ViewResidencies' %}">View Residencies</a></li> <!-- Admin View Residency -->
+
+        </ul>
+      </li>
+
+      <li><a><i class="fa fa-file"></i>Reports<span class="fas fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+
+          <li><a href="#">Groups Inventory</a></li> <!-- Faculty (Thesis Adviser) View Groups Inventory -->
+          <li><a href="{% url 'Faculty/ResidencyReport' %}">Student Attendance</a></li>
+
+        </ul>
+      </li>
+
+      <li><a href="{% url 'Faculty/Inbox' %}"><i class="fas fa-envelope"></i>Inbox</a></li>
+
+    </ul>
+  </div>
+</div>

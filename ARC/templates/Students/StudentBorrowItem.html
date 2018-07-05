@@ -10,23 +10,8 @@
 
     <title>ARC | </title>
 
-	<link href="{% static 'production/custom-font/montserrat.css' %}" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="{% static 'production/../vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="{% static 'production/../vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="{% static 'production/../vendors/nprogress/nprogress.css' %}" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="{% static 'production/../vendors/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
-    <link href="{% static 'production/../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'production/../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'production/../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'production/../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'production/../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
+    {% include 'import-css.html' %}
 
-    <!-- Custom Theme Style -->
-    <link href="{% static 'production/../build/css/custom.css' %}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -47,38 +32,7 @@
             <br />
 
             <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <ul class="nav side-menu">
-
-                  <li><a href="{% url 'Student/Calendar' %}"><i class="fa fa-home"></i> Home</a></li>
-
-                  <li><a href="#"><i class="fa fa-user"></i>Profile</a></li>
-
-
-                  <li><a><i class="fa fa-users"></i>Residency<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-
-                      <li><a href="#">Set Residency</a></li>
-                      <li><a href="#">Edit Residency</a></li>
-
-                    </ul>
-                  </li>
-
-
-                  <li><a><i class="fa fa-file"></i>Reports<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-
-                      <li><a href="#">Inventory</a></li>
-
-                    </ul>
-                  </li>
-
-                  <li><a href="{% url 'Student/Inbox' %}"><i class="fa fa-envelope"></i>Inbox</a></li>
-
-                </ul>
-              </div>
-            </div>
+            {% include 'student-sidebar.html' %}
             <!-- /sidebar menu -->
 
           </div>

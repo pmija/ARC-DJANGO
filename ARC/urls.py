@@ -48,6 +48,8 @@ urlpatterns = [
     url(r'^Student/ReturnItem2$', views.StudentReturnItem2, name='Student/ReturnItem2'),
     #Inbox
     url(r'^Student/Inbox$', views.StudentInbox, name='Student/Inbox'),
+    #Residency
+    url(r'Student/SetResidency$', views.StudentSetResidency, name='Student/SetResidency'),
     #<--END-->
 
     #<--FACULTY-->
