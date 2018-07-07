@@ -109,6 +109,9 @@ def StudentSetResidency(request):
 
 def StudentEditResidency(request):
     return render(request, 'Students/StudentEditResidency.html')
+
+def StudentGroupInventory(request):
+    return render(request, 'Students/StudentGroupInventory.html')
 #<--END-->
 
 #<--FACULTY-->
@@ -185,4 +188,7 @@ def FacultyTechManageTerm(request):
 
 def FacultyTechResidencyReport(request):
     return render(request, 'FacultyTech/FacultyTechResidencyReport.html')
+
+def FacultyTechGroupsInventory(request):
+    return render(request, 'FacultyTech/FacultyTechGroupsInventory.html')
 #<--END-->

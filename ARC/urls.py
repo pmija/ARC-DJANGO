@@ -51,6 +51,8 @@ urlpatterns = [
     #Residency
     url(r'Student/SetResidency$', views.StudentSetResidency, name='Student/SetResidency'),
     url(r'Student/EditResidency$', views.StudentEditResidency, name='Student/EditResidency'),
+    #Reports
+    url(r'Student/GroupInventory$', views.StudentGroupInventory, name='Student/GroupInventory'),
     #<--END-->
 
     #<--FACULTY-->
@@ -91,6 +93,7 @@ urlpatterns = [
     #Reports
     url(r'^FacultyTech/ResidencyReport$', views.FacultyTechResidencyReport, name='FacultyTech/ResidencyReport'),
     url(r'^FacultyTech/BorrowedItems$', views.FacultyTechBorrowedItems, name='FacultyTech/BorrowedItems'),
+    url(r'^FacultyTech/GroupsInventory$', views.FacultyTechGroupsInventory, name='FacultyTech/GroupsInventory'),
     #Inbox
     url(r'^FacultyTech/Inbox$', views.FacultyTechInbox, name='FacultyTech/Inbox'),
     #<--END-->
