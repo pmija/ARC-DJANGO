@@ -106,6 +106,9 @@ def StudentReturnItem2(request):
 
 def StudentSetResidency(request):
     return render(request, 'Students/StudentSetResidency.html')
+
+def StudentEditResidency(request):
+    return render(request, 'Students/StudentEditResidency.html')
 #<--END-->
 
 #<--FACULTY-->
@@ -165,8 +168,8 @@ def FacultyTechReturnItem(request):
 def FacultyTechReturnItem2(request):
     return render(request, 'FacultyTech/FacultyTechReturnItem2.html')
 
-def FacultyTechViewInventory(request):
-    return render(request, 'FacultyTech/FacultyTechViewInventory.html')
+def FacultyTechBorrowedItems(request):
+    return render(request, 'FacultyTech/FacultyTechBorrowedItems.html')
 
 def FacultyTechAddItem(request):
     return render(request, 'FacultyTech/FacultyTechAddItem.html')

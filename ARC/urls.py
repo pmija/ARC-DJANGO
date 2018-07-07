@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^Student/Inbox$', views.StudentInbox, name='Student/Inbox'),
     #Residency
     url(r'Student/SetResidency$', views.StudentSetResidency, name='Student/SetResidency'),
+    url(r'Student/EditResidency$', views.StudentEditResidency, name='Student/EditResidency'),
     #<--END-->
 
     #<--FACULTY-->
@@ -78,7 +79,6 @@ urlpatterns = [
     url(r'^FacultyTech$', views.FacultyTechDashboard, name='FacultyTech/Dashboard'),
     url(r'^FacultyTech/Calendar$', views.FacultyTechCalendar, name='FacultyTech/Calendar'),
     #Inventory
-    url(r'^FacultyTech/ViewInventory$', views.FacultyTechViewInventory, name='FacultyTech/ViewInventory'),
     url(r'^FacultyTech/AddItem$', views.FacultyTechAddItem, name='FacultyTech/AddItem'),
     #Residency
     url(r'^FacultyTech/ViewResidencies$', views.FacultyTechViewResidencies, name='FacultyTech/ViewResidencies'),
@@ -90,6 +90,7 @@ urlpatterns = [
     url(r'^FacultyTech/ReturnItem2$', views.FacultyTechReturnItem2, name='FacultyTech/ReturnItem2'),
     #Reports
     url(r'^FacultyTech/ResidencyReport$', views.FacultyTechResidencyReport, name='FacultyTech/ResidencyReport'),
+    url(r'^FacultyTech/BorrowedItems$', views.FacultyTechBorrowedItems, name='FacultyTech/BorrowedItems'),
     #Inbox
     url(r'^FacultyTech/Inbox$', views.FacultyTechInbox, name='FacultyTech/Inbox'),
     #<--END-->
