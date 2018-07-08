@@ -1,2 +1,11 @@
+<<<<<<< Updated upstream
 
 *.pyc
+=======
+
+ARC/__pycache__/
+>>>>>>> Stashed changes
+
+ThesisProject/__pycache__/
+
+ARC/migrations/

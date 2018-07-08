@@ -261,22 +261,18 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>999999999</td>
-                                <td>Raspberry Pi 3 Model B+</td>
-                                <td>1</td>
-                                <td>CEHCI</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" class="btn btn-success" data-toggle="modal" data-target=".div-register-itemid-borrow-modal">Add Item</button></td>
-                              </tr>
-                              <tr>
-                                <td>88888888</td>
-                                <td>Raspberry Pi 3 Model B</td>
-                                <td>1</td>
-                                <td>CEHCI</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" class="btn btn-success" data-toggle="modal" data-target=".div-register-itemid-borrow-modal">Add Item</button></td>
-                              </tr>
+                            {% block content2 %}
+								{% for inv in inventory %}
+									<tr>
+									  <td>{{ inv.0 }}</td>
+									  <td>{{ inv.1 }}</td>
+									  <td>{{ inv.4 }}</td>
+									  <td></td>
+									  <td></td>
+									  <td class="actions"><button type="button" onclick="addClick(this)" id="{{ labs.0 }}" name="details" class="btn btn-success hello" data-toggle="modal" data-target=".div-edit-lab-modal">Add Item</button></td>
+									</tr>
+								{% endfor %}
+							{% endblock %}
                             </tbody>
                           </table>
 
@@ -363,6 +359,24 @@
     </div>
 
     {% include 'import-js.html' %}
-    
+    <script>
+	function editClick(elem) {
+		var tableid = elem.id;
+		console.log(tableid);
+		
+		$.ajax({
+			url: "/ajax/editlab",
+			method: "POST",
+			data:{
+				'tableid':tableid,
+				 'csrfmiddlewaretoken':$( 'input[name=csrfmiddlewaretoken]' ).val()
+			},
+				
+			success: function(data){
+				
+			}
+		});
+	}
+	</script>
   </body>
 </html>

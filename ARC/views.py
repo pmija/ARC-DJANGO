@@ -20,9 +20,17 @@ def EditLabAjax(request):
 	if request.method == 'POST':
 		tableid = request.POST['tableid']
 		labtoedit = Ref_Laboratory.objects.filter(LabID=tableid)
-		labs_serialized = serializers.serialize('json', labtoedit)
+		lab_serialized = serializers.serialize('json', labtoedit)
 		
-		return JsonResponse(labs_serialized, safe=False)
+		return JsonResponse(lab_serialized, safe=False)
+
+def BorrowItemAjax(request):
+	if request.method == 'POST':
+		id = request.POST['tableid']
+		itemtoborrow = Ref_Laboratory.objects.filter(ItemID=id )
+		item_serialized = serializers.serialize('json', itemtoborrow)
+		
+		return JsonResponse(item_serialized, safe=False)
 
 #<--ADMIN-->
 def AdminDashboard(request):
@@ -211,7 +219,12 @@ def FacultyTechInbox(request):
     return render(request, 'FacultyTech/FacultyTechInbox.html')
 
 def FacultyTechBorrowItem(request):
-    return render(request, 'FacultyTech/FacultyTechBorrowItem.html')
+	inventory = Inventory.objects.all().values_list()
+	
+	return render(request, 'FacultyTech/FacultyTechBorrowItem.html', {
+        'inventory': inventory
+    })
+	
 
 def FacultyTechReturnItem(request):
     return render(request, 'FacultyTech/FacultyTechReturnItem.html')
