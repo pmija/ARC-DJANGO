@@ -14,8 +14,8 @@ class LaboratoryForm(forms.Form):
 	
 	class Meta:
 		labname = forms.CharField()
-		roomnum = forms.CharField()
-		cap = forms.IntegerField()
+		roomno = forms.CharField()
+		capacity = forms.IntegerField()
 		
 class TermForm(forms.Form):
 	

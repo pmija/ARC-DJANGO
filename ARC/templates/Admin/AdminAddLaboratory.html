@@ -73,9 +73,19 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-					         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                      <div class="form-group">
+					<form method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">{% csrf_token %}
+                      {% block content %}
+							{% for c in Check %}
+								{% if c == 'Success' %}
+								<div class="form-group">
+									<div class="control-label col-md-6 col-sm-3 col-xs-12">
+										<h4 style="color:green">Success</h4>
+									</div>
+								</div>
+								{% endif %}
+							{% endfor %}
+						{% endblock %}
+					  <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="labname">Laboratory Name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -92,7 +102,7 @@
                       <div class="form-group">
                         <label for="capacity" class="control-label col-md-3 col-sm-3 col-xs-12">Capacity<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="capacity" class="form-control col-md-7 col-xs-12" type="number" name="capacity">
+                          <input id="capacity" class="form-control col-md-7 col-xs-12" type="number" name="capacity" min="1">
                         </div>
                       </div>
                       <div class="ln_solid"></div>

@@ -12,6 +12,7 @@
 
     {% include 'import-css.html' %}
 
+	
   </head>
 
   <body class="nav-md">
@@ -75,7 +76,17 @@
                   <div class="x_content">
 
                     <form action="" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">{% csrf_token %}
-
+						{% block content %}
+							{% for c in Check %}
+								{% if c == 'Success' %}
+								<div class="form-group">
+									<div class="control-label col-md-6 col-sm-3 col-xs-12">
+										<h4 style="color:green">Success</h4>
+									</div>
+								</div>
+								{% endif %}
+							{% endfor %}
+						{% endblock %}
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="itemname">Item Name
                         </label>

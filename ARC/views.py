@@ -1,17 +1,28 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
+from django.core import serializers
+
 #Forms
 from ARC.forms import InventoryForm
-from ARC.forms import LaboratoryForm
 from ARC.forms import LaboratoryForm
 
 #Models
 from ARC.models import Inventory
 from ARC.models import Ref_Laboratory
-# Create your views here.
 
+
+# Create your views here.
 def login(request):
     return render(request, 'login.html')
+
+#AJAX
+def EditLabAjax(request):
+	if request.method == 'POST':
+		tableid = request.POST['tableid']
+		labtoedit = Ref_Laboratory.objects.filter(LabID=tableid)
+		labs_serialized = serializers.serialize('json', labtoedit)
+		
+		return JsonResponse(labs_serialized, safe=False)
 
 #<--ADMIN-->
 def AdminDashboard(request):
@@ -43,24 +54,24 @@ def AdminViewInventory(request):
 
 
 def AdminAddItem(request):
-    if request.method == 'POST':
-        form = InventoryForm(request.POST)
-        if form.is_valid():
-            name = request.POST.get('itemname', '')
-            desc = request.POST.get('description', '')
-            type = request.POST.get('item_type', '')
-            qty = request.POST.get('quantity', '')
-            uid = request.POST.get('uid', '')
-            inventory_obj = Inventory(ItemName=name, Description=desc, ItemType=type, Quantity=qty, UniqueID=uid)
-            inventory_obj.save();
+	if request.method == 'POST':
+		form = InventoryForm(request.POST)
+		if form.is_valid():
+			itemname = request.POST.get('itemname', '')
+			description = request.POST.get('description', '')
+			item_type = request.POST.get('item_type', '')
+			quantity = request.POST.get('quantity', '')
+			uid = request.POST.get('uid', '')
+			inventory_obj = Inventory(ItemName=itemname, Description=description, ItemType=item_type, Quantity=quantity, UniqueID=uid)
+			inventory_obj.save();
 
-            return HttpResponse("Success")
+			return render(request,'Admin/AdminAddItem.html', {'Check': ['Success']})
 
-    else:
-        form = InventoryForm()
+	else:
+		form = InventoryForm()
 
-    return render(request, 'Admin/AdminAddItem.html', {
-        'form': form,
+	return render(request, 'Admin/AdminAddItem.html', {
+        'form': form
     })
 
 def AdminViewResidencies(request):
@@ -76,10 +87,47 @@ def AdminResidencyReport(request):
     return render(request, 'Admin/AdminResidencyReport.html')
 
 def AdminAddLaboratory(request):
-    return render(request, 'Admin/AdminAddLaboratory.html')
+	if request.method == 'POST':
+		form = LaboratoryForm(request.POST)
+		if form.is_valid():
+			labname = request.POST.get('labname', '')
+			roomno = request.POST.get('roomno', '')
+			capacity = request.POST.get('capacity', '')
+			inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
+			inventory_obj.save();
+
+			return render(request,'Admin/AdminAddLaboratory.html', {'Check': ['Success']})
+
+	else:
+		form = InventoryForm()
+
+	return render(request, 'Admin/AdminAddLaboratory.html', {
+        'form': form
+    })
 
 def AdminEditLaboratory(request):
-    return render(request, 'Admin/AdminEditLaboratory.html')
+	laboratories = Ref_Laboratory.objects.all().values_list()
+	
+	if request.method == 'POST':
+		
+		labname = request.POST.get('labname', '')
+		roomno = request.POST.get('roomno', '')
+		capacity = request.POST.get('capacity', '')
+		labid = request.POST.get('labid', '')
+		#inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
+		#inventory_obj.save();
+		Ref_Laboratory.objects.filter(LabID=labid).update(LaboratoryName=labname,RoomNum=roomno, Capacity=capacity)
+		
+		return render(request, 'Admin/AdminEditLaboratory.html', {'Labs': laboratories, 'Check': ['Success']})
+
+	else:
+		form = InventoryForm()
+
+	return render(request, 'Admin/AdminEditLaboratory.html', {
+        'Labs': laboratories
+    })
+	
+	
 #<--END-->
 
 #<--STUDENT-->

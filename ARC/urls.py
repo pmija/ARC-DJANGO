@@ -97,6 +97,11 @@ urlpatterns = [
     #Inbox
     url(r'^FacultyTech/Inbox$', views.FacultyTechInbox, name='FacultyTech/Inbox'),
     #<--END-->
+	
+	
+	
+	#AJAX
+	url(r'ajax/editlab', views.EditLabAjax, name='FacultyTech/Inbox'),
 
     #<-----------END OF DIRECTORIES--------->
     ]
