@@ -169,6 +169,9 @@ def FacultyDashboard(request):
 def FacultyEvaluateUser(request):
     return render(request, 'Faculty/FacultyEvaluateUser.html')
 
+def FacultyProfile(request):
+    return render(request, 'Faculty/FacultyProfile.html')
+
 def FacultyCalendar(request):
     return render(request, 'Faculty/FacultyCalendar.html')
 
@@ -206,6 +209,9 @@ def FacultyTechDashboard(request):
 
 def FacultyTechCalendar(request):
     return render(request, 'FacultyTech/FacultyTechCalendar.html')
+
+def FacultyTechProfile(request):
+    return render(request, 'FacultyTech/FacultyTechProfile.html')
 
 def FacultyTechInbox(request):
     return render(request, 'FacultyTech/FacultyTechInbox.html')

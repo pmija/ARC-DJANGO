@@ -59,6 +59,7 @@ urlpatterns = [
     #Dashboard
     url(r'^Faculty$', views.FacultyDashboard, name='Faculty/Dashboard'),
     url(r'^Faculty/Calendar$', views.FacultyCalendar, name='Faculty/Calendar'),
+	url(r'^Faculty/Profile$', views.FacultyProfile, name='Faculty/Profile'),
     #Groups
     url(r'Faculty/EvaluateUser$', views.FacultyEvaluateUser, name='Faculty/EvaluateUser'),
     url(r'Faculty/ManageGroups$', views.FacultyManageGroups, name='Faculty/ManageGroups'),
@@ -80,6 +81,7 @@ urlpatterns = [
     #Dashboard
     url(r'^FacultyTech$', views.FacultyTechDashboard, name='FacultyTech/Dashboard'),
     url(r'^FacultyTech/Calendar$', views.FacultyTechCalendar, name='FacultyTech/Calendar'),
+	url(r'^FacultyTech/Profile$', views.FacultyTechProfile, name='FacultyTech/Profile'),
     #Inventory
     url(r'^FacultyTech/AddItem$', views.FacultyTechAddItem, name='FacultyTech/AddItem'),
     #Residency
