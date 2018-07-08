@@ -111,6 +111,20 @@
 							           <input id="mobileno" name="mobileno" class="form-control col-md-5 col-xs-12" min="1000000000" max="9999999999" type="number">
 						          </div>
                       </div>
+					  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="degree">Degree
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="degree" class="form-control" required>
+                            <option disabled selected value="">-- Select Degree --</option>
+                            <option value="BS Computer Science Major in Computer Systems Engineering (CS-CSE)">BS Computer Science Major in Computer Systems Engineering (CS-CSE)</option>
+                            <option value="BS Computer Science with Specialization in Network Engineering (CS-NE)">BS Computer Science with Specialization in Network Engineering (CS-NE)</option>
+                            <option value="BS Computer Science with Specialization in Software Technology (CS-ST)">BS Computer Science with Specialization in Software Technology (CS-ST)</option>
+							<option value="BS Information Technology (BS-IT)">BS Information Technology (BS-IT)</option>
+							<option value="BS Information Systems (BS-IS)">BS Information Systems (BS-IS)</option>
+                          </select>
+                        </div>
+                      </div>
                       <!-- Only for Students -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="adviser">Adviser
@@ -152,6 +166,6 @@
     </div>
 
     {% include 'import-js.html' %}
-
+	
   </body>
 </html>

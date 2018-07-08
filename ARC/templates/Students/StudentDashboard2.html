@@ -308,6 +308,10 @@
     <!-- /calendar modal -->
     
     {% include 'import-js.html' %}
-
+	<script>
+	$('#calendar').fullCalendar({
+	  defaultView: 'agendaWeek'
+	});
+	</script>
   </body>
 </html>
