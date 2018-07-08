@@ -92,7 +92,7 @@
                               <label class="control-label col-md-2 col-sm-3 col-xs-12" for="quantity" style="text-align: right;">Unique ID </label>
                               <div class="col-md-10 col-sm-6 col-xs-12">
                                 <input type="number" id="unique_id_return" name="unique_id" required="required" class="form-control col-md-6 col-xs-12">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".div-register-itemid-borrow-modal">
+                                <button type="button" class="btn btn-primary" onclick="registerItem" data-toggle="modal" data-target=".div-register-itemid-borrow-modal">
                                 Register Item</button>
                               </div>
                             </div>
@@ -106,19 +106,8 @@
                                 <th style="width: 140px;">Actions</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <td>Raspberry Pi 3 Model B+</td>
-                                <td>1</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" class="btn btn-danger" value="#">Remove</button></td>
-                              </tr>
-                              <tr>
-                                <td>Raspberry Pi 3 Model B</td>
-                                <td>1</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" class="btn btn-danger" value="#">Remove</button></td>
-                              </tr>
+                            <tbody id="borrowitem">
+                              
                             </tbody>
                             </table>
 
@@ -195,17 +184,8 @@
                                         <th>Recent Item Remarks</th>
                                       </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>Raspberry Pi 3 Model B+</td>
-                                        <td>1</td>
-                                        <td></td>
-                                      </tr>
-                                      <tr>
-                                        <td>Raspberry Pi 3 Model B</td>
-                                        <td>1</td>
-                                        <td></td>
-                                      </tr>
+                                    <tbody id="">
+                                      
                                     </tbody>
                                     </table>
 
@@ -247,7 +227,7 @@
                       <h5><big><b>All Available Items (Manual Entry)</b></big></h5>
                       </div>
 
-                        <form method="POST" action="#">
+                        <form method="POST" action="">{% csrf_token %}
 
                           <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
@@ -269,7 +249,7 @@
 									  <td>{{ inv.4 }}</td>
 									  <td></td>
 									  <td></td>
-									  <td class="actions"><button type="button" onclick="addClick(this)" id="{{ labs.0 }}" name="details" class="btn btn-success hello" data-toggle="modal" data-target=".div-edit-lab-modal">Add Item</button></td>
+									  <td class="actions"><button type="button" id="{{ inv.0 }}" onclick="appendModal(this)" name="ids" class="btn btn-success hello" data-toggle="modal" data-target=".div-register-itemid-borrow-modal">Add Item</button></td>
 									</tr>
 								{% endfor %}
 							{% endblock %}
@@ -288,7 +268,7 @@
                     <!-- MODAL FOR REGISTER ITEM UNIQUE ID -->
                     <!-- MODAL FOR REGISTER ITEM UNIQUE ID -->
 
-                    <div class="modal fade div-register-itemid-borrow-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade div-register-itemid-borrow-modal" id="mymodal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-sm" id="register-itemid-borrow-modal">
                     <div class="modal-content">
 
@@ -308,28 +288,20 @@
                             <div class="clearfix"></div>
                           </div>
 
-                          <div class="x_content">
-
-                            <h5><b>Item Name: </b> &nbsp; Raspberry Pi 3 Model B+</h5>
-                            <h5><b>Laboratory: </b> &nbsp; G403</h5>
-                            <h5><b>Comments: </b> &nbsp; No comments.</h5>
-                            <h5><b>Remarks: </b> &nbsp; No remarks.</h5>
-
+                          <div id="modalcontent" class="x_content">
+								<!--AJAX CONTENT-->
                           </div>
 
                         </div>
 
-                        <div class="form-group">
+                        <div  class="form-group">
                           <label class="control-label col-md-3 col-xs-12" for="quantity" style="text-align: center;">Quantity to borrow</label>
-                          <div class="col-md-8 col-sm-7 col-xs-12">
-                            <input type="number" name="quantity" required="required" class="form-control col-md-12 col-xs-12" style="margin-top: 10px">
+                          <div id="modalqty" class="col-md-8 col-sm-7 col-xs-12">
                           </div>
                         </div>
 
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Register Item</button>
+                      <div id="modalbutton"class="modal-footer">
                       </div>
 
                       </form>
@@ -360,22 +332,73 @@
 
     {% include 'import-js.html' %}
     <script>
-	function editClick(elem) {
-		var tableid = elem.id;
-		console.log(tableid);
+	
+	function appendModal(elem){
+		var id = elem.id;
+		console.log(id);
 		
 		$.ajax({
-			url: "/ajax/editlab",
+			url: "/ajax/borrowitem",
 			method: "POST",
 			data:{
-				'tableid':tableid,
+				'id':id,
 				 'csrfmiddlewaretoken':$( 'input[name=csrfmiddlewaretoken]' ).val()
 			},
 				
 			success: function(data){
-				
+				$('#modalcontent').empty();
+				$('#modalbutton').empty();
+				$('#modalqty').empty();
+				var newdata = JSON.parse(data);
+				console.log(newdata[0].pk);
+				var regitem = document.getElementsByName("registeritembutton");
+				regitem.value = newdata[0].pk;
+				$('#modalcontent').append('<h5><b>Item Name: </b> &nbsp;'+ newdata[0].fields.ItemName +'</h5>\
+                            <h5><b>Laboratory: </b> &nbsp;</h5>\
+                            <h5><b>Comments: </b> &nbsp;</h5>\
+                            <h5><b>Remarks: </b> &nbsp;</h5>\
+							')
+							
+				$('#modalqty').append('<input type="number" name="quantity" id="quantity" required="required" class="form-control col-md-12 col-xs-12" style="margin-top: 10px">')
+							
+				$('#modalbutton').append('<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
+                        <button type="button" id='+ newdata[0].pk +' name="registeritembutton" onclick="addClick(this)" class="btn btn-success">Register Item</button>')
 			}
 		});
+		
+	}
+	
+	function addClick(elem) {
+		var id = elem.id;
+		console.log(id);
+		
+		var quantity = $('#quantity').val();
+		
+		$('#mymodal').modal('hide');
+		
+		$.ajax({
+			url: "/ajax/borrowitem",
+			method: "POST",
+			data:{
+				'id':id,
+				 'csrfmiddlewaretoken':$( 'input[name=csrfmiddlewaretoken]' ).val()
+			},
+				
+			success: function(data){
+				var newdata = JSON.parse(data);
+				$('#borrowitem').append('<tr>\
+                                        <td>'+ newdata[0].fields.ItemName +'</td>\
+                                        <td>'+ quantity +'</td>\
+                                        <td></td>\
+									  <td class="actions"><button type="button" name="details" class="btn btn-danger" value="#">Remove</button></td>\
+                                      </tr>')
+			}
+			
+		});
+	}
+	
+	function registerItem(){
+			
 	}
 	</script>
   </body>

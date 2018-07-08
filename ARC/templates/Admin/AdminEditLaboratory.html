@@ -200,7 +200,7 @@
 		console.log(tableid);
 		
 		$.ajax({
-			url: "/ajax/borrowitem",
+			url: "/ajax/editlab",
 			method: "POST",
 			data:{
 				'tableid':tableid,
@@ -208,7 +208,38 @@
 			},
 				
 			success: function(data){
-				
+				$('#modal').empty();
+				var newdata = JSON.parse(data);
+				document.getElementById("labid").value = newdata[0].pk;
+				console.log(newdata[0].fields.LaboratoryName);
+				$('#modal').append('\
+						  <div class="form-group">\
+                            <label class="control-label col-md-3 col-xs-12" for="quantity">Laboratory Name</label>\
+                            <div class="col-md-8 col-sm-7 col-xs-12">\
+                              <input value=' + newdata[0].fields.LaboratoryName +' type="input" name="labname" required="required" class="form-control col-md-12 col-xs-12" style="margin-top: 10px">\
+                            </div>\
+                          </div>\
+						  <div class="form-group">\
+                            <label class="control-label col-md-3 col-xs-12" for="quantity">Room Number</label>\
+                            <div class="col-md-8 col-sm-7 col-xs-12">\
+                              <input value=' + newdata[0].fields.RoomNum+' type="input" name="roomno" required="required" class="form-control col-md-12 col-xs-12">\
+                            </div>\
+                          </div>\
+						  <div class="form-group">\
+                            <label class="control-label col-md-3 col-xs-12" for="quantity">Capacity</label>\
+                            <div class="col-md-8 col-sm-7 col-xs-12">\
+                              <input value=' + newdata[0].fields.Capacity+' type="number" name="capacity" required="required" class="form-control col-md-12 col-xs-12 button">\
+                            </div>\
+                          </div>\
+						  <div class="form-group">\
+                            <label class="control-label col-md-3 col-xs-12" for="quantity">Status</label>\
+                            <div class="col-md-8 col-sm-7 col-xs-12">\
+                              <select class="form-control">\
+                                <option>Active</option>\
+                                <option>Inactive</option>\
+                              </select>\
+                            </div>\
+                          </div>')
 			}
 		});
 	}

@@ -26,8 +26,8 @@ def EditLabAjax(request):
 
 def BorrowItemAjax(request):
 	if request.method == 'POST':
-		id = request.POST['tableid']
-		itemtoborrow = Ref_Laboratory.objects.filter(ItemID=id )
+		id = request.POST['id']
+		itemtoborrow = Inventory.objects.filter(ItemID=id )
 		item_serialized = serializers.serialize('json', itemtoborrow)
 		
 		return JsonResponse(item_serialized, safe=False)

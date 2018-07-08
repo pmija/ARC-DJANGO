@@ -11,7 +11,10 @@
     <title>ARC | </title>
     
     {% include 'import-css.html' %}
-
+	<style>
+	h5   {margin-bottom:5px;font-weight:bold;font-size:16px;}
+	h6   {margin-bottom:25px;font-size:15px;}
+	</style>
   </head>
 
   <body class="nav-md">
@@ -73,21 +76,95 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <h5><b>Name: </b> &nbsp; CAUYAO, Bianca Marie R.</h5>
-                    <h5><b>Student No: </b> &nbsp; 11425733</h5>
-                    <h5><b>Adviser: </b> &nbsp; Fritz Flores</h5>
-                    <h5><b>Laboratory: </b> &nbsp; CEHCI</h5>
-                    <h5><details>
-                      <summary><b>Group: </b> TIM MIJARES</summary>
-                      <p><u><b>Members:</b></u><br>
+                    <h3><b><u>Bianca Marie R. Cauyao</u></b><button type="button" id="editbtn" name="details" class="btn btn-primary" style="float:right;margin-right:50px;">Edit Profile</button></h3>
+					<div class="wrap">
+					<div class="left" style="margin-left:20px;float:left;">
+                    <h5>Student No:</h5><h6>11425733</h6>
+					<h5>E-mail:</h5><h6>bianca_cauyao@dlsu.edu.ph</h6>
+					<h5>Mobile No:</h5><h6>+639178235191</h6>
+                    <h5>Degree:</h5><h6>BS Information Technology (BS-IT)</h6>
+					</div>
+					<div class="right" style="margin-right:330px;float:right;">
+					<h5>Adviser</h5><h6>Fritz Flores</h6>
+                    <h5>Laboratory:</h5><h6>CEHCI</h6>
+                    <h5>Group:</h5><h6>TIM MIJARES
+                      <details>
+                      <summary><u><b>Members:</b></u></summary>
+                      <p style="margin-top:5px;margin-left:15px;">
                           Bianca Marie Cauyao<br>
                           Kim Onate<br>
                           Patrick Mijares<br>
                           Timothy Samontina</p>
 
-                        </details></h5>
-
+                        </details></h6>
+					</div>
                   </div>
+				  <!-- MODAL -->
+					<div class="modal fade" id="editprofile" role="dialog">
+						<div class="modal-dialog">
+						
+						  <!-- Modal content-->
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4>Edit Profile</h4>
+							</div>
+							<div class="modal-body">
+							  <form action="" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+								
+								  <div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="idnum">ID Number
+									</label>
+									<div class="col-md-7 col-sm-6 col-xs-12">
+									  <input placeholder="11425733" type="text" id="last-name" name="idnum" required="required" class="form-control col-md-7 col-xs-12">
+									</div>
+								  </div>
+								  <div class="form-group">
+									<label for="firstname" class="control-label col-md-3 col-sm-3 col-xs-12">First Name</label>
+									<div class="col-md-7 col-sm-6 col-xs-12">
+									  <input placeholder="Bianca Marie" id="firstname" class="form-control col-md-7 col-xs-12" type="text" name="fullname">
+									</div>
+								  </div>
+								  <div class="form-group">
+									<label for="lastname" class="control-label col-md-3 col-sm-3 col-xs-12">Last Name</label>
+									<div class="col-md-7 col-sm-6 col-xs-12">
+									  <input placeholder="Cauyao" id="lastname" class="form-control col-md-7 col-xs-12" type="text" name="fullname">
+									</div>
+								  </div>
+								  <div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Mobile Number
+									</label>
+									<div class="col-md-2 col-sm-1 col-xs-12">
+												   <input class="form-control col-md-2 col-xs-12" type="text"  disabled placeholder="+63">
+												</div>
+												<div class="col-md-5 col-sm-5 col-xs-12">
+												   <input placeholder="9178235191" id="mobileno" name="mobileno" class="form-control col-md-5 col-xs-12" min="1000000000" max="9999999999" type="number">
+											  </div>
+								  </div>
+								  <div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="degree">Degree
+									</label>
+									<div class="col-md-7 col-sm-6 col-xs-12">
+									  <select id="degree" class="form-control" required>
+										<option value="BS Computer Science Major in Computer Systems Engineering (CS-CSE)">BS Computer Science Major in Computer Systems Engineering (CS-CSE)</option>
+										<option value="BS Computer Science with Specialization in Network Engineering (CS-NE)">BS Computer Science with Specialization in Network Engineering (CS-NE)</option>
+										<option value="BS Computer Science with Specialization in Software Technology (CS-ST)">BS Computer Science with Specialization in Software Technology (CS-ST)</option>
+										<option selected value="BS Information Technology (BS-IT)">BS Information Technology (BS-IT)</option>
+										<option value="BS Information Systems (BS-IS)">BS Information Systems (BS-IS)</option>
+									  </select>
+									</div>
+								  </div>
+							  </form>
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  <button type="submit" class="btn btn-success">Submit</button>
+							</div>
+						  </div>
+						  
+						</div>
+					  </div> 
+                  <!-- END MODAL -->
                 </div>
               </div>
             </div>
@@ -105,6 +182,12 @@
     </div>
 
     {% include 'import-js.html' %}
-
+<script>
+$(document).ready(function(){
+    $("#editbtn").click(function(){
+        $("#editprofile").modal();
+    });
+});
+</script>
   </body>
 </html>
