@@ -231,6 +231,8 @@ def FacultyTechBorrowItem(request):
         'inventory': inventory
     })
 	
+	
+	
 
 def FacultyTechReturnItem(request):
     return render(request, 'FacultyTech/FacultyTechReturnItem.html')
