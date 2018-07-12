@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^Admin$', views.AdminDashboard, name='Admin/Dashboard'),
     url(r'^Admin/Calendar$', views.AdminCalendar, name='Admin/Calendar'),
     #Accounts
-    url(r'^Admin/ManageUser$', views.AdminManageUser, name='Admin/ManageUser'),
+    url(r'^Admin/ManageUsers$', views.AdminManageUsers, name='Admin/ManageUsers'),
     url(r'Admin/AddUser$', views.AdminAddUser, name='Admin/AddUser'),
     #Inventory
     url(r'^Admin/ViewInventory$', views.AdminViewInventory, name='Admin/ViewInventory'),

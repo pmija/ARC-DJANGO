@@ -73,34 +73,21 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-					<form method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">{% csrf_token %}
-                      {% block content %}
-							{% for c in Check %}
-								{% if c == 'Success' %}
-								<div class="form-group">
-									<div class="control-label col-md-6 col-sm-3 col-xs-12">
-										<h4 style="color:green">Success</h4>
-									</div>
-								</div>
-								{% endif %}
-							{% endfor %}
-						{% endblock %}
-					  <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="labname">Laboratory Name <span class="required">*</span>
-                        </label>
+          					<form method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">{% csrf_token %}
+          					  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="labname">Laboratory Name </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="labname" name="labname" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fullname">Room Number <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fullname">Room Number </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="roomno" name="roomno" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="capacity" class="control-label col-md-3 col-sm-3 col-xs-12">Capacity<span class="required">*</span></label>
+                        <label for="capacity" class="control-label col-md-3 col-sm-3 col-xs-12">Capacity </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="capacity" class="form-control col-md-7 col-xs-12" type="number" name="capacity" min="1">
                         </div>
@@ -130,6 +117,22 @@
     </div>
 
     {% include 'import-js.html' %}
+    {% block content %}
+      {% for c in Check %}
+        {% if c == 'Success' %}
+
+          <script>
+            new PNotify({
+              title: 'Done Adding Laboratory',
+              text: 'You have successfully added [labname] on [roomname]!',
+              type: 'success',
+              styling: 'bootstrap3'
+            });
+          </script>
+
+        {% endif %}
+      {% endfor %}
+    {% endblock %}
 
   </body>
 </html>

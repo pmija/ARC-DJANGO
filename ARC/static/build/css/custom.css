@@ -28,11 +28,17 @@
 
 }
 
+#edit-lab-modal {
+
+    width: 950px;
+
+}
+
 /* sana ginawa ko nalang to class pota - next time ko nalang ayusin */ 
 #item-scan-modal, #item-remarks-modal, #item-return-remarks-modal, 
 #item-borrowed-remarks-modal, #checkout-items-modal, #confirm-return-items-modal,
 #register-itemid-borrow-modal, #register-itemid-return-modal, #curr-sched-modal,
-#edit-lab-modal, #eval-user-modal, #eval-residency-modal, #view-item-details-modal,
+#eval-user-modal, #eval-residency-modal, #view-item-details-modal,
 #view-item-log-modal, #edit-item-details-modal, #view-resi-details-modal,
 #view-user-details-modal, #edit-user-details-modal, #checkout-sched-modal {
 

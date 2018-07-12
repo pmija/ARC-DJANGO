@@ -48,8 +48,8 @@ def AdminInbox(request):
 def AdminAddUser(request):
     return render(request, 'Admin/AdminAddUser.html')
 
-def AdminManageUser(request):
-    return render(request, 'Admin/AdminManageUser.html')
+def AdminManageUsers(request):
+    return render(request, 'Admin/AdminManageUsers.html')
 
 def AdminBorrowItem(request):
     return render(request, 'Admin/AdminBorrowItem.html')
@@ -105,7 +105,7 @@ def AdminAddLaboratory(request):
 		inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
 		inventory_obj.save()
 
-		return render(request,'Admin/AdminAddLaboratory.html', {'Check': ['Success']})
+		return render(request,'Admin/AdminAddLaboratory.html', {'Check': ['Success'], 'Labname': labname, 'Roomno': roomno})
 
 	else:
 
