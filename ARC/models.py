@@ -35,7 +35,8 @@ class ActualResidency(models.Model):
 	Student = models.IntegerField(default=0)
 	DateTime = models.DateTimeField()
 	TimeIn = models.TimeField()
-	TimeOut = models.TimeField(null=True)
+	TimeOut = models.TimeField(blank=True, null=True)
+	ResidencyStatus = models.IntegerField(blank=True, null=True)
 
 class Ref_Term(models.Model):
 	TermID = models.AutoField(primary_key=True)
@@ -80,7 +81,9 @@ class AuditTable_Inventory(models.Model):
 	AuditID = models.AutoField(primary_key=True)
 	AuditAction = models.IntegerField(default=0)
 	ItemID = models.IntegerField(default=0)
+	Quantity = models.IntegerField(blank=True,null=True)
 	DateTime = models.DateTimeField()
-	DateTimeReturned = models.DateTimeField(null=True)
-	Borrower = models.IntegerField(default=0)
-	Lender = models.IntegerField(default=0)
+	DateTimeReturned = models.DateTimeField(blank=True,null=True)
+	Borrower = models.IntegerField(blank=True, null=True)
+	Lender = models.IntegerField(blank=True, null=True)
+	BorrowStatus = models.IntegerField(blank=True, null=True)

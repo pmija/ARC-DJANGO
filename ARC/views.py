@@ -1,14 +1,14 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
-
-#Forms
-from ARC.forms import InventoryForm
-from ARC.forms import LaboratoryForm
+from django.db.models import Max
+import datetime
 
 #Models
 from ARC.models import Inventory
 from ARC.models import Ref_Laboratory
+from ARC.models import AuditTable_Inventory
 
 
 # Create your views here.
@@ -66,24 +66,24 @@ def AdminViewInventory(request):
 
 def AdminAddItem(request):
 	if request.method == 'POST':
-		form = InventoryForm(request.POST)
-		if form.is_valid():
-			itemname = request.POST.get('itemname', '')
-			description = request.POST.get('description', '')
-			item_type = request.POST.get('item_type', '')
-			quantity = request.POST.get('quantity', '')
-			uid = request.POST.get('uid', '')
-			inventory_obj = Inventory(ItemName=itemname, Description=description, ItemType=item_type, Quantity=quantity, UniqueID=uid)
-			inventory_obj.save();
+		itemname = request.POST.get('itemname', '')
+		description = request.POST.get('description', '')
+		item_type = request.POST.get('item_type', '')
+		quantity = request.POST.get('quantity', '')
+		uid = request.POST.get('uid', '')
+		
+		inventory_obj = Inventory(ItemName=itemname, Description=description, ItemType=item_type, Quantity=quantity, UniqueID=uid)
+		inventory_obj.save()
+		inv = Inventory.objects.all().values_list()
+		inv_max = inv.aggregate(Max('ItemID'))
+		print(inv_max['ItemID__max'])
+		auditInventory = AuditTable_Inventory(AuditAction=2, ItemID=inv_max['ItemID__max'], DateTime=datetime.datetime.now(),  Lender=1)
+		auditInventory.save()
 
-			return render(request,'Admin/AdminAddItem.html', {'Check': ['Success']})
+		return render(request,'Admin/AdminAddItem.html', {'Check': ['Success']})
 
 	else:
-		form = InventoryForm()
-
-	return render(request, 'Admin/AdminAddItem.html', {
-        'form': form
-    })
+		return render(request, 'Admin/AdminAddItem.html')
 
 def AdminViewResidencies(request):
     return render(request, 'Admin/AdminViewResidencies.html')
@@ -99,22 +99,17 @@ def AdminResidencyReport(request):
 
 def AdminAddLaboratory(request):
 	if request.method == 'POST':
-		form = LaboratoryForm(request.POST)
-		if form.is_valid():
-			labname = request.POST.get('labname', '')
-			roomno = request.POST.get('roomno', '')
-			capacity = request.POST.get('capacity', '')
-			inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
-			inventory_obj.save();
+		labname = request.POST.get('labname', '')
+		roomno = request.POST.get('roomno', '')
+		capacity = request.POST.get('capacity', '')
+		inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
+		inventory_obj.save()
 
-			return render(request,'Admin/AdminAddLaboratory.html', {'Check': ['Success']})
+		return render(request,'Admin/AdminAddLaboratory.html', {'Check': ['Success']})
 
 	else:
-		form = InventoryForm()
 
-	return render(request, 'Admin/AdminAddLaboratory.html', {
-        'form': form
-    })
+		return render(request, 'Admin/AdminAddLaboratory.html')
 
 def AdminEditLaboratory(request):
 	laboratories = Ref_Laboratory.objects.all().values_list()
@@ -126,17 +121,15 @@ def AdminEditLaboratory(request):
 		capacity = request.POST.get('capacity', '')
 		labid = request.POST.get('labid', '')
 		#inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
-		#inventory_obj.save();
+		#inventory_obj.save()
 		Ref_Laboratory.objects.filter(LabID=labid).update(LaboratoryName=labname,RoomNum=roomno, Capacity=capacity)
 		
 		return render(request, 'Admin/AdminEditLaboratory.html', {'Labs': laboratories, 'Check': ['Success']})
 
 	else:
-		form = InventoryForm()
-
-	return render(request, 'Admin/AdminEditLaboratory.html', {
-        'Labs': laboratories
-    })
+		return render(request, 'Admin/AdminEditLaboratory.html', {
+			'Labs': laboratories
+		})
 	
 	
 #<--END-->
@@ -229,13 +222,24 @@ def FacultyTechInbox(request):
 
 def FacultyTechBorrowItem(request):
 	inventory = Inventory.objects.all().values_list()
-	
-	return render(request, 'FacultyTech/FacultyTechBorrowItem.html', {
-        'inventory': inventory
-    })
-	
-	
-	
+	if request.method == 'POST':
+		uniqueid = request.POST.get('unique_id', '')
+		idborrow = request.POST.getlist('idborrow[]', '')
+		qtyborrow = request.POST.getlist('qtyborrow[]', '')
+		
+		for i in range(0, len(idborrow)):
+			print (idborrow[i] + ' ' + qtyborrow[i])
+			auditInventory = AuditTable_Inventory(AuditAction=1, ItemID=idborrow[i], Quantity=qtyborrow[i], DateTime=datetime.datetime.now(), Borrower=uniqueid, Lender=1, BorrowStatus=1)
+			auditInventory.save();
+		
+		return render(request, 'FacultyTech/FacultyTechBorrowItem.html', {
+			'inventory': inventory
+		})
+		
+	else:
+		return render(request, 'FacultyTech/FacultyTechBorrowItem.html', {
+			'inventory': inventory
+		})
 
 def FacultyTechReturnItem(request):
     return render(request, 'FacultyTech/FacultyTechReturnItem.html')
