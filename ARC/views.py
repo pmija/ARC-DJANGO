@@ -15,6 +15,9 @@ from ARC.models import Ref_Laboratory
 def login(request):
     return render(request, 'login.html')
 
+def timeinout(request):
+    return render(request, 'timein-out.html')
+	
 #AJAX
 def EditLabAjax(request):
 	if request.method == 'POST':
