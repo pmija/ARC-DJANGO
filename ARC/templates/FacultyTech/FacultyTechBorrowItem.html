@@ -86,8 +86,6 @@
 
             						  <div class="x_content">
 
-                            
-
                             <div class="form-group" style="margin-bottom:50px;">
                               <label class="control-label col-md-2 col-sm-3 col-xs-12" for="quantity" style="text-align: right;">Unique ID </label>
                               <div class="col-md-10 col-sm-6 col-xs-12">
@@ -237,17 +235,17 @@
                             </thead>
                             <tbody>
                             {% block content2 %}
-								{% for inv in inventory %}
-									<tr>
-									  <td>{{ inv.0 }}</td>
-									  <td>{{ inv.1 }}</td>
-									  <td>{{ inv.4 }}</td>
-									  <td></td>
-									  <td></td>
-									  <td class="actions"><button type="button" id="{{ inv.0 }}" onclick="appendModal(this)" name="ids" class="btn btn-success hello" data-toggle="modal" data-target=".div-register-itemid-borrow-modal">Add Item</button></td>
-									</tr>
-								{% endfor %}
-							{% endblock %}
+                						{% for inv in inventory %}
+                							<tr>
+                							  <td>{{ inv.0 }}</td>
+                							  <td>{{ inv.1 }}</td>
+                							  <td>{{ inv.4 }}</td>
+                							  <td></td>
+                							  <td></td>
+                							  <td class="actions"><button type="button" id="{{ inv.0 }}" onclick="appendModal(this)" name="ids" class="btn btn-success hello" data-toggle="modal" data-target=".div-register-itemid-borrow-modal">Add Item</button></td>
+                							</tr>
+                						{% endfor %}
+                					{% endblock %}
                             </tbody>
                           </table>
                       </div>
@@ -281,7 +279,7 @@
                           </div>
 
                           <div id="modalcontent" class="x_content">
-								<!--AJAX CONTENT-->
+								            <!--AJAX CONTENT-->
                           </div>
 
                         </div>
@@ -350,6 +348,7 @@
 				var regitem = document.getElementsByName("registeritembutton");
 				regitem.value = newdata[0].pk;
 				$('#modalcontent').append('<h5><b>Item Name: </b> &nbsp;'+ newdata[0].fields.ItemName +'</h5>\
+                            <h5><b>Quantity Available: </b> &nbsp; <span id="curr_qty">'+ newdata[0].fields.Quantity +'</span></h5>\
                             <h5><b>Laboratory: </b> &nbsp;</h5>\
                             <h5><b>Comments: </b> &nbsp;</h5>\
                             <h5><b>Remarks: </b> &nbsp;</h5>\
@@ -367,28 +366,45 @@
 		var id = elem.id;
 		
 		var quantity = $('#quantity').val();
-		
-		$('#mymodal').modal('hide');
-		
-		$.ajax({
-			url: "/ajax/borrowitem",
-			method: "POST",
-			data:{
-				'id':id,
-				 'csrfmiddlewaretoken':$( 'input[name=csrfmiddlewaretoken]' ).val()
-			},
-				
-			success: function(data){
-				var newdata = JSON.parse(data);
-				$('#borrowitem').append('<tr>\
-                                        <td class="tdforname" id='+newdata[0].fields.ItemName+'>'+ newdata[0].fields.ItemName +'</td>\
-                                        <td class="tdforqty" id='+quantity+'>'+ quantity +'</td>\
-                                        <td></td>\
-									  <td class="actions"><button type="button" id='+newdata[0].pk+' name="details" onclick="removeItem(this)" class="btn btn-danger tdforid">Remove</button></td>\
-                                      </tr>')
-			}
+    var curr_qty = $('#curr_qty').val();
+
+    if (quantity <= curr_qty) {
+
+  		$('#mymodal').modal('hide');
+
+  		$.ajax({
+  			url: "/ajax/borrowitem",
+  			method: "POST",
+  			data:{
+  				'id':id,
+  				'csrfmiddlewaretoken':$( 'input[name=csrfmiddlewaretoken]' ).val()
+  			},
+  				
+  			success: function(data){
+  				var newdata = JSON.parse(data);
+  				$('#borrowitem').append('<tr>\
+          <td class="tdforname" id='+newdata[0].fields.ItemName+'>'+ newdata[0].fields.ItemName +'</td>\
+          <td class="tdforqty" id='+quantity+'>'+ quantity +'</td>\
+          <td></td>\
+				  <td class="actions"><button type="button" id='+newdata[0].pk+' name="details" onclick="removeItem(this)" class="btn btn-danger tdforid">Remove</button></td>\
+          </tr>')
+  			}
 			
-		});
+		  });
+
+    }
+
+    else {
+
+      new PNotify({
+        title: 'Cannot add to borrow list',
+        text: 'Quantity you entered is greater than the current quantity of this item!',
+        type: 'error',
+        styling: 'bootstrap3'
+      });
+
+    }
+
 	}
 	
 	function registerItem(){
@@ -410,6 +426,13 @@
 		
 		
 	}
+
+  function checkQty(){
+
+
+
+  }
+
 	</script>
   </body>
 </html>
