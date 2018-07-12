@@ -105,7 +105,7 @@ def AdminAddLaboratory(request):
 		inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
 		inventory_obj.save()
 
-		return render(request,'Admin/AdminAddLaboratory.html', {'Check': ['Success'], 'Labname': labname, 'Roomno': roomno})
+		return render(request,'Admin/AdminAddLaboratory.html', {'Check': ['Success']})
 
 	else:
 
