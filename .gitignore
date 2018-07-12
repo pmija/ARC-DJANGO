@@ -3,3 +3,4 @@ ARC/__pycache__/
 ThesisProject/__pycache__/
 ARC/migrations/
 db\.sqlite3
+*.pyc
