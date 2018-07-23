@@ -76,7 +76,7 @@
 
                   <!-- RETURN ITEMS -->
 
-        					<div class="col-md-7">
+        					<div class="col-md-6">
         						<div class="x_panel">
         						  <div class="x_title">
         							<h3><b>Items to Return</b></h3>
@@ -84,7 +84,7 @@
         						  </div>
         						  <div class="x_content">
 
-        						    <form method="POST" action="#" class="form-horizontal form-label-left">
+        			  <form method="POST" action="#" class="form-horizontal form-label-left">
 
                         <div class="form-group">
                           <label class="control-label col-md-2 col-sm-3 col-xs-12" for="quantity" style="text-align: left;">Unique ID </label>
@@ -95,6 +95,8 @@
                         </div>
 
                         </form>
+						
+						
 
                           <table class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
                             <thead>
@@ -107,22 +109,17 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Raspberry Pi 3 Model B+</td>
-                                <td>1</td>
-                                <td>06/20/2018</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" data-toggle="modal" data-target=".div-item-return-remarks-modal" class="btn btn-warning">Remarks</button>
-                                  <button type="button" name="details" class="btn btn-danger" value="#">Remove</button></td>
-                              </tr>
-                              <tr>
-                                <td>Raspberry Pi 3 Model B</td>
-                                <td>1</td>
-                                <td>06/12/2018</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" data-toggle="modal" data-target=".div-item-return-remarks-modal" class="btn btn-warning">Remarks</button>
-                                  <button type="button" name="details" class="btn btn-danger" value="#">Remove</button></td>
-                              </tr>
+                              {% block content2 %}
+                					{% for inv in inventory %}
+										<tr>
+                						  <td>{{ inv.2 }}</td>
+                						  <td>{{ inv.3 }}</td>
+                						  <td>{{ inv.4 }}</td>
+                						  <td></td>
+                						  <td class="actions"><button  id="{{ inv.0 }}" type="button" name="returnbutton" onclick="toReturn(this)" class="btn btn-danger">Return</button></td>
+                						</tr>
+                					{% endfor %}
+                				{% endblock %}
                             </tbody>
                           </table>
 
@@ -247,13 +244,17 @@
                           </div>
 
                           <hr class="no-margin">
-
+							
+							
+						</div>
+						
                           <div class="form-group">
-                            <div class="col-md-12" align="center">
+                            <div class="col-md-10" align="center">
                               <button type="submit" class="btn btn-success" data-toggle="modal" data-target=".div-confirm-return-items-modal">
                               Return Items</button>
                             </div>
                           </div>
+						  
 
                           <!-- MODAL FOR RETURN ITEM CHECKOUT -->
 
@@ -268,8 +269,10 @@
                               </div>
                               <div class="modal-body">
 
-                              <form method="POST" action="#" class="form-horizontal form-label-left">
-
+                              <form method="POST" action="{% url 'FacultyTech/ReturnItem2' %}" class="form-horizontal form-label-left">{% csrf_token %}
+							  <div id="topass">
+								
+							  </div>
                                 <div class="x_panel">
 
                                   <div class="x_title">
@@ -280,11 +283,16 @@
                                   <div class="x_content">
 
                                     <hr class="no-margin">
-
-                                    <h5><b>Name: </b> &nbsp; CAUYAO, Bianca Marie R.</h5>
-                                    <h5><b>Student No: </b> &nbsp; 11425733</h5>
-                                    <h5><b>Adviser: </b> &nbsp; Fritz Flores</h5>
-                                    <h5><b>Laboratory: </b> &nbsp; CEHCI</h5>
+									{% block content4 %}
+										{% for uinfo in userinfo %}
+											<h5><b>Name: </b> &nbsp; {{ uinfo.4 }}</h5>
+											<h5><b>Student No: </b> &nbsp;  {{ uinfo.5 }}</h5>
+											<h5><b>Adviser: </b> &nbsp; Fritz Flores</h5>
+											<h5><b>Laboratory: </b> &nbsp; CEHCI</h5>
+										{% endfor %}
+									{% endblock %}
+                                    
+                                    
 
                                   </div>
 
@@ -353,10 +361,14 @@
                       </div>
                       <div class="x_content">
 
-                      <h5><b>Name: </b> &nbsp; CAUYAO, Bianca Marie R.</h5>
-                      <h5><b>Student No: </b> &nbsp; 11425733</h5>
-                      <h5><b>Adviser: </b> &nbsp; Fritz Flores</h5>
-                      <h5><b>Laboratory: </b> &nbsp; CEHCI</h5>
+                      {% block content3 %}
+							{% for uinfo in userinfo %}
+								<h5><b>Name: </b> &nbsp; {{ uinfo.4 }}</h5>
+								<h5><b>Student No: </b> &nbsp;  {{ uinfo.5 }}</h5>
+								<h5><b>Adviser: </b> &nbsp; </h5>
+								<h5><b>Laboratory: </b> &nbsp; </h5>
+							{% endfor %}
+						{% endblock %}
 
                       </div>
                     </div>
@@ -376,7 +388,6 @@
         							<h5><big><b>All Borrowed Items</b></big></h5>
         						  </div>
 
-                        <form method="POST" action="#">
 
                           <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
@@ -386,29 +397,25 @@
                                 <th style="width: 8%">Quantity</th>
                                 <th style="width: 10%">Laboratory</th>
                                 <th style="width: 12%">Date Borrowed</th>
-                                <th>Remarks</th>
+                                <th>Date Returned</th>
                                 <th style="width: 100px">Actions</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>999999999</td>
-                                <td>Raspberry Pi 3 Model B+</td>
-                                <td>1</td>
-                                <td>CEHCI</td>
-                                <td>06/20/2018</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" class="btn btn-warning" value="#" data-toggle="modal" data-target=".div-item-borrowed-remarks-modal" class="btn btn-warning">Remarks</button></td>
-                              </tr>
-                              <tr>
-                                <td>88888888</td>
-                                <td>Raspberry Pi 3 Model B</td>
-                                <td>1</td>
-                                <td>CEHCI</td>
-                                <td>06/12/2018</td>
-                                <td></td>
-                                <td class="actions"><button type="button" name="details" class="btn btn-warning" value="#" data-toggle="modal" data-target=".div-item-borrowed-remarks-modal" class="btn btn-warning">Remarks</button></td>
-                              </tr>
+								{% block content5 %}
+                					{% for pborrow in pastborrow %}
+										<tr>
+                						  <td>{{ pborrow.2 }}</td>
+                						  <td></td>
+                						  <td>{{ pborrow.3 }}</td>
+                						  <td></td>
+                						  <td>{{ pborrow.4 }}</td>
+                						  <td>{{ pborrow.5 }}</td>
+										  <td class="actions"><button type="button" name="details" class="btn btn-warning" value="#" data-toggle="modal" data-target=".div-item-borrowed-remarks-modal" class="btn btn-warning">Remarks</button></td>
+										</tr>
+									{% endfor %}
+                				{% endblock %}
+                              
                             </tbody>
                           </table>
 
@@ -419,8 +426,6 @@
                               <button type="submit" class="btn btn-success">Apply Remarks</button><p>
                             </div>
                           </div>
-
-                        </form>
 
                         <!-- MODAL FOR ADDING REMARKS FOR BORROWED -->
                         <!-- MODAL FOR ADDING REMARKS FOR BORROWED -->
@@ -436,8 +441,6 @@
                               <h4 class="modal-title" id="myModalLabel2">Add Remarks</h4>
                             </div>
                             <div class="modal-body">
-
-                            <form method="POST" action="#" class="form-horizontal form-label-left">
 
                               <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type">Remarks
@@ -463,8 +466,6 @@
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                               <button type="button" class="btn btn-success">Save changes</button>
                             </div>
-
-                            </form>
 
                           </div>
                           </div>
@@ -495,6 +496,15 @@
     </div>
 
     {% include 'import-js.html' %}
+	
+	<script>
+	function toReturn(elem){
+		var id = elem.id;
+		
+		console.log(id);
+		$('#topass').append('<input name="itemreturn[]" value='+id+'>')
+	}
+	</script>
 
   </body>
 </html>

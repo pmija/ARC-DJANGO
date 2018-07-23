@@ -13,6 +13,7 @@ class Ref_UserStatus(models.Model):
 class Group(models.Model):
 	GroupID = models.AutoField(primary_key=True)
 	Adviser = models.CharField(max_length=50, default='')
+	Lab = models.IntegerField(default=0)
 	
 class User(models.Model):
 	UserID = models.AutoField(primary_key=True)
@@ -75,7 +76,8 @@ class Inventory(models.Model):
 	Description = models.CharField(max_length=50, default='')
 	ItemType = models.CharField(max_length=50, default='')
 	Quantity = models.IntegerField(default=0)
-	UniqueID = models.IntegerField(default=0)
+	ItemUniqueID = models.IntegerField(default=0)
+	QtyBorrowed = models.IntegerField(default=0)
 
 class AuditTable_Inventory(models.Model):
 	AuditID = models.AutoField(primary_key=True)
@@ -85,5 +87,5 @@ class AuditTable_Inventory(models.Model):
 	DateTime = models.DateTimeField()
 	DateTimeReturned = models.DateTimeField(blank=True,null=True)
 	Borrower = models.IntegerField(blank=True, null=True)
-	Lender = models.IntegerField(blank=True, null=True)
+	Admin = models.IntegerField(blank=True, null=True)
 	BorrowStatus = models.IntegerField(blank=True, null=True)

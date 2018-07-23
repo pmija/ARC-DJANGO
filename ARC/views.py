@@ -4,12 +4,14 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.db.models import Max
 import datetime
+from django.shortcuts import redirect
+from django.shortcuts import reverse
 
 #Models
 from ARC.models import Inventory
 from ARC.models import Ref_Laboratory
 from ARC.models import AuditTable_Inventory
-
+from ARC.models import User
 
 # Create your views here.
 def login(request):
@@ -32,8 +34,23 @@ def BorrowItemAjax(request):
 		id = request.POST['id']
 		itemtoborrow = Inventory.objects.filter(ItemID=id )
 		item_serialized = serializers.serialize('json', itemtoborrow)
-		
 		return JsonResponse(item_serialized, safe=False)
+		
+def BorrowItemManAjax(request):
+	if request.method == 'POST':
+		uniqueid = request.POST['uniqueid']
+		itemtoborrow2 = Inventory.objects.filter(ItemUniqueID=uniqueid )
+		item2_serialized = serializers.serialize('json', itemtoborrow2)
+		
+		return JsonResponse(item2_serialized, safe=False)
+		
+def UserInfoAjax(request):
+	if request.method == 'POST':
+		studentid = request.POST['studentid']
+		userinfo = User.objects.filter(NFCUniqueID=studentid)
+		user_serialized = serializers.serialize('json', userinfo)
+		
+		return JsonResponse(user_serialized, safe=False)
 
 #<--ADMIN-->
 def AdminDashboard(request):
@@ -72,12 +89,12 @@ def AdminAddItem(request):
 		quantity = request.POST.get('quantity', '')
 		uid = request.POST.get('uid', '')
 		
-		inventory_obj = Inventory(ItemName=itemname, Description=description, ItemType=item_type, Quantity=quantity, UniqueID=uid)
+		inventory_obj = Inventory(ItemName=itemname, Description=description, ItemType=item_type, Quantity=quantity, ItemUniqueID=uid)
 		inventory_obj.save()
 		inv = Inventory.objects.all().values_list()
 		inv_max = inv.aggregate(Max('ItemID'))
 		print(inv_max['ItemID__max'])
-		auditInventory = AuditTable_Inventory(AuditAction=2, ItemID=inv_max['ItemID__max'], DateTime=datetime.datetime.now(),  Lender=1)
+		auditInventory = AuditTable_Inventory(AuditAction=2, ItemID=inv_max['ItemID__max'], Quantity=quantity, DateTime=datetime.datetime.now(),  Admin=1)
 		auditInventory.save()
 
 		return render(request,'Admin/AdminAddItem.html', {'Check': ['Success']})
@@ -120,10 +137,11 @@ def AdminEditLaboratory(request):
 		roomno = request.POST.get('roomno', '')
 		capacity = request.POST.get('capacity', '')
 		labid = request.POST.get('labid', '')
+		asd = request.POST.getlist('sched[]', '')
+		print(asd)
 		#inventory_obj = Ref_Laboratory(LaboratoryName=labname, RoomNum=roomno, Capacity=capacity)
 		#inventory_obj.save()
 		Ref_Laboratory.objects.filter(LabID=labid).update(LaboratoryName=labname,RoomNum=roomno, Capacity=capacity)
-		
 		return render(request, 'Admin/AdminEditLaboratory.html', {'Labs': laboratories, 'Check': ['Success']})
 
 	else:
@@ -228,24 +246,54 @@ def FacultyTechBorrowItem(request):
 		qtyborrow = request.POST.getlist('qtyborrow[]', '')
 		
 		for i in range(0, len(idborrow)):
-			print (idborrow[i] + ' ' + qtyborrow[i])
-			auditInventory = AuditTable_Inventory(AuditAction=1, ItemID=idborrow[i], Quantity=qtyborrow[i], DateTime=datetime.datetime.now(), Borrower=uniqueid, Lender=1, BorrowStatus=1)
-			auditInventory.save();
-		
+			auditInventory = AuditTable_Inventory(AuditAction=1, ItemID=idborrow[i], Quantity=qtyborrow[i], DateTime=datetime.datetime.now(), Borrower=uniqueid, Admin=1, BorrowStatus=1)
+			auditInventory.save()
+			inv = Inventory.objects.all().values_list().filter(ItemID=idborrow[i])
+			currentBorrow = int(inv[0][6])
+			stringBorrow = str(qtyborrow[i])
+			toBorrow = int(stringBorrow)
+			totalBorrow = currentBorrow + toBorrow
+			finalTotalBorrow = int(totalBorrow)
+			Inventory.objects.filter(ItemID=idborrow[i]).update(QtyBorrowed=finalTotalBorrow)
 		return render(request, 'FacultyTech/FacultyTechBorrowItem.html', {
 			'inventory': inventory
 		})
 		
 	else:
+		print(inventory)
 		return render(request, 'FacultyTech/FacultyTechBorrowItem.html', {
 			'inventory': inventory
 		})
 
 def FacultyTechReturnItem(request):
-    return render(request, 'FacultyTech/FacultyTechReturnItem.html')
+	if request.method == 'POST':
+		uid = request.POST.get('uniqueid', '')
+		return redirect(reverse("View2", args =[inventory, pastborrow, userinfo]))
+	else:
+		return render(request, 'FacultyTech/FacultyTechReturnItem.html')
 
 def FacultyTechReturnItem2(request):
-    return render(request, 'FacultyTech/FacultyTechReturnItem2.html')
+	if request.method == 'POST':
+		returnitem = request.POST.getlist('itemreturn[]', '')
+		for i in range(0, len(returnitem)):
+			AuditTable_Inventory.objects.filter(AuditID=returnitem[i]).update(DateTimeReturned=datetime.datetime.now(), BorrowStatus=2)
+			auditlatest = AuditTable_Inventory.objects.all().values_list().filter(AuditID=returnitem[i])
+			inv = Inventory.objects.all().values_list().filter(ItemID=auditlatest[0][2])
+			currentBorrow = int(inv[0][6])
+			qtyToSubtract = int(auditlatest[0][3])
+			finalQtyBorrowRemaining = currentBorrow - qtyToSubtract
+			print (finalQtyBorrowRemaining)
+			Inventory.objects.filter(ItemID=auditlatest[0][2]).update(QtyBorrowed=finalQtyBorrowRemaining)
+		return render(request, 'FacultyTech/FacultyTechReturnItem2.html')
+	else:
+		uid = request.GET.get('uniqueid')
+		inventory = AuditTable_Inventory.objects.all().filter(Borrower=uid, BorrowStatus=1).values_list()
+		pastborrow = AuditTable_Inventory.objects.all().filter(Borrower=uid, BorrowStatus=2).values_list()
+		userinfo = User.objects.all().filter(NFCUniqueID=uid).values_list()
+		print (inventory)
+		print (pastborrow)
+		print (userinfo)
+		return render(request, 'FacultyTech/FacultyTechReturnItem2.html', {'inventory': inventory, 'pastborrow': pastborrow, 'userinfo': userinfo})
 
 def FacultyTechBorrowedItems(request):
     return render(request, 'FacultyTech/FacultyTechBorrowedItems.html')

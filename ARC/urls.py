@@ -106,6 +106,8 @@ urlpatterns = [
 	#AJAX
 	url(r'ajax/editlab', views.EditLabAjax, name='Admin/EditLabAjax'),
 	url(r'ajax/borrowitem', views.BorrowItemAjax, name='FacultyTech/BorrowItemAjax'),
+	url(r'ajax/manualborrowitem', views.BorrowItemManAjax, name='FacultyTech/BorrowItemManAjax'),
+	url(r'ajax/getuserinfo', views.UserInfoAjax, name='FacultyTech/UserInfoAjax'),
 
     #<-----------END OF DIRECTORIES--------->
     ]
