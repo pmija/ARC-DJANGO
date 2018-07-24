@@ -108,6 +108,7 @@ urlpatterns = [
 	url(r'ajax/borrowitem', views.BorrowItemAjax, name='FacultyTech/BorrowItemAjax'),
 	url(r'ajax/manualborrowitem', views.BorrowItemManAjax, name='FacultyTech/BorrowItemManAjax'),
 	url(r'ajax/getuserinfo', views.UserInfoAjax, name='FacultyTech/UserInfoAjax'),
+	url(r'ajax/gettimein', views.TimeInOutAjax, name='TimeInOutAjax'),
 
     #<-----------END OF DIRECTORIES--------->
     ]

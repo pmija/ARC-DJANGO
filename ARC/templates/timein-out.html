@@ -41,24 +41,75 @@
 
             </div>
 
-            <form>
+            <form>{% csrf_token %}
 			  <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="uniqueid">Unique ID Number
-                        </label>
-                        <div class="col-md-8 col-sm-6 col-xs-12">
-                          <input type="text" id="uniquieid" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="uniqueid">Unique ID Number</label>
+                   <div class="col-md-8 col-sm-6 col-xs-12">
+                      <input type="text" id="uniquieid" required="required" onchange="hello(this)" class="form-control col-md-7 col-xs-12">
+                   </div>
               </div> 		
               <div class="clearfix"></div>
-                 <button type="submit" class="btn btn-success">Time In</button>
-				 <button class="btn btn-default" type="button">Time Out</button>
-              <div class="separator">
-              </div>
-
+              <div class="separator"></div>
+			  <div id="userinfo">
+			  
+			  </div>
             </form>
           </section>
 
     </div>
+	{% include 'import-js.html' %}
+	<script>
+	function hello(elem){
+		console.log(elem.value);
+		studentid = elem.value;
+		$.ajax({
+			url: "/ajax/getuserinfo",
+			method: "POST",
+			data:{
+				'studentid':studentid,
+				 'csrfmiddlewaretoken':$( 'input[name=csrfmiddlewaretoken]' ).val()
+			},
+				
+			success: function(data){
+				var newdata = JSON.parse(data);
+				console.log(newdata);
+				if (newdata.length != 0){
+					$('#userinfo').empty();
+					$('#userinfo').append('<h5><b>Name: </b> &nbsp;'+ newdata[0].fields.Name +'</h5>\
+										<h5><b>Student No: </b> &nbsp; '+ newdata[0].fields.IDNumber +'</h5>\
+										<h5><b>Adviser: </b> &nbsp; </h5>\
+										<h5><b>Laboratory: </b> &nbsp; </h5>')
+					myClick();
+				}
+				else{
+					$('#userinfo').empty();
+				}
+				
+				$.ajax({
+					url: "/ajax/gettimein",
+					method: "POST",
+					data:{
+						'studentid':studentid,
+						'csrfmiddlewaretoken':$( 'input[name=csrfmiddlewaretoken]' ).val()
+					},
+						
+					success: function(data){
+						var newdata = JSON.parse(data);
+						
+					}
+					
+				  });
 
+			}
+		});
+	}
+	
+	function myClick() {
+	  setTimeout(
+		function() {
+		  $('#userinfo').empty();
+		}, 5000);
+	}
+	</script>
   </body>
 </html>

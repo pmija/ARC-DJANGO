@@ -12,13 +12,17 @@ from ARC.models import Inventory
 from ARC.models import Ref_Laboratory
 from ARC.models import AuditTable_Inventory
 from ARC.models import User
+from ARC.models import ActualResidency
 
 # Create your views here.
 def login(request):
     return render(request, 'login.html')
 
 def timeinout(request):
-    return render(request, 'timein-out.html')
+	if request.method == 'POST':
+		return render(request, 'timein-out.html')
+	else:
+		return render(request, 'timein-out.html')
 	
 #AJAX
 def EditLabAjax(request):
@@ -51,6 +55,18 @@ def UserInfoAjax(request):
 		user_serialized = serializers.serialize('json', userinfo)
 		
 		return JsonResponse(user_serialized, safe=False)
+		
+def TimeInOutAjax(request):
+	if request.method == 'POST':
+		studentid = request.POST['studentid']
+		res = ActualResidency.objects.all().values_list().filter(Student=studentid, ResidencyStatus=1)
+		if not res:
+			actualres = ActualResidency(Student=studentid, DateTime=datetime.datetime.now(), TimeIn=datetime.datetime.now(), ResidencyStatus=1)
+			actualres.save()
+		else:
+			ActualResidency.objects.filter(Student=studentid, ResidencyStatus=1).update(TimeOut=datetime.datetime.now(),  ResidencyStatus=2)
+		res_serialized = serializers.serialize('json', res)
+		return JsonResponse(res_serialized, safe=False)
 
 #<--ADMIN-->
 def AdminDashboard(request):

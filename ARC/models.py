@@ -34,7 +34,7 @@ class Inbox(models.Model):
 class ActualResidency(models.Model):
 	ActualResidencyID = models.AutoField(primary_key=True)
 	Student = models.IntegerField(default=0)
-	DateTime = models.DateTimeField()
+	DateTime = models.DateField()
 	TimeIn = models.TimeField()
 	TimeOut = models.TimeField(blank=True, null=True)
 	ResidencyStatus = models.IntegerField(blank=True, null=True)
